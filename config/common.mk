@@ -278,6 +278,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Exchange2
 
+# Google Assistant
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.opa.eligible_device=true
+
 # Extra tools in Havoc
 PRODUCT_PACKAGES += \
     7z \
