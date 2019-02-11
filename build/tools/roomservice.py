@@ -242,8 +242,8 @@ if depsonly:
     repo_path = get_from_manifest(device)
     if repo_path:
         fetch_dependencies(repo_path)
-    else:
-        print("Trying dependencies-only mode on a non-existing device tree?")
+#    else:
+#        print("Trying dependencies-only mode on a non-existing device tree?")
 
     sys.exit()
 

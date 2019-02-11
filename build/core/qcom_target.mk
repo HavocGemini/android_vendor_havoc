@@ -7,6 +7,9 @@ endef
 define bt-vendor-set-path-variant
 $(call project-set-path-variant,bt-vendor,TARGET_BT_VENDOR_VARIANT,hardware/qcom/$(1))
 endef
+define ril-set-path-variant
+$(call project-set-path-variant,ril,TARGET_RIL_VARIANT,hardware/$(1))
+endef
 
 # Set device-specific HALs into project pathmap
 define set-device-specific-path
@@ -32,7 +35,6 @@ $(call set-device-specific-path,SENSORS,sensors,hardware/qcom/sensors)
 $(call set-device-specific-path,LOC_API,loc-api,vendor/qcom/opensource/location)
 $(call set-device-specific-path,DATASERVICES,dataservices,vendor/qcom/opensource/dataservices)
 $(call set-device-specific-path,POWER,power,hardware/qcom/power)
-$(call set-device-specific-path,THERMAL,thermal,hardware/qcom/thermal)
 $(call set-device-specific-path,VR,vr,hardware/qcom/vr)
 
 ifeq ($(BOARD_USES_AOSP_WLAN_HAL),true)
@@ -41,6 +43,7 @@ else
 $(call wlan-set-path-variant,wlan-caf)
 endif
 
+$(call ril-set-path-variant,ril)
 $(call bt-vendor-set-path-variant,bt-caf)
 
 PRODUCT_CFI_INCLUDE_PATHS += \

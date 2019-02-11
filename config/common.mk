@@ -1,6 +1,6 @@
 PRODUCT_BRAND ?= Havoc-OS
 
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=+3
 
 EXCLUDE_SYSTEMUI_TESTS := true
 
@@ -18,10 +18,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.build.selinux=1 \
     ro.carrier=unknown
 
-PRODUCT_PROPERTY_OVERRIDES := \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES := \
     persist.sys.wfd.nohdcp=1 \
-    persist.debug.wfd.enable=1 \
-    persist.sys.wfd.virtual=0 \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0
 
@@ -97,17 +95,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/havoc/prebuilt/common/etc/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
 
-# Latin IME lib
-ifeq ($(TARGET_ARCH),arm64)
-PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/lib64/libjni_latinime.so:system/lib64/libjni_latinime.so \
-    vendor/havoc/prebuilt/common/lib64/libjni_latinimegoogle.so:system/lib64/libjni_latinimegoogle.so
-else
-PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so \
-    vendor/havoc/prebuilt/common/lib/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so
-endif
-
 # Do not include art debug targets
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 
@@ -128,6 +115,7 @@ PRODUCT_PACKAGES += \
     SoundPickerPrebuilt \
     Stk \
     Terminal \
+    Updates \
     WallpaperPickerGooglePrebuilt \
     WeatherProvider
 
@@ -274,6 +262,10 @@ PRODUCT_COPY_FILES += \
     vendor/havoc/prebuilt/common/etc/sysconfig/google-hiddenapi-package-whitelist.xml:system/etc/sysconfig/google-hiddenapi-package-whitelist.xml \
     vendor/havoc/prebuilt/common/etc/sysconfig/pixel.xml:system/etc/sysconfig/pixel.xml
 
+# Keyboard libs
+PRODUCT_COPY_FILES += \
+    vendor/havoc/prebuilt/common/lib64/libjni_latinimegoogle.so:system/lib64/libjni_latinimegoogle.so
+
 # Exchange support
 PRODUCT_PACKAGES += \
     Exchange2
@@ -292,6 +284,7 @@ PRODUCT_PACKAGES += \
     htop \
     lib7z \
     libsepol \
+    nano \
     pigz \
     powertop \
     unrar \
@@ -360,9 +353,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/havoc/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/havoc/overlay/common
-
-# Bootanimation
-include vendor/havoc/config/bootanimation.mk
 
 # Version
 include vendor/havoc/config/version.mk
