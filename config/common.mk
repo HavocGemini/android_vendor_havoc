@@ -256,14 +256,26 @@ PRODUCT_PACKAGES += \
     HideCutout \
     StatusBarStock
 
+# Google prebuilts
+PRODUCT_PACKAGES += \
+    DigitalWellbeing \
+    MarkupGoogle \
+    Turbo
+
+# Markup libs
+PRODUCT_COPY_FILES += \
+    $(PREB_PATH)/lib64/libsketchology_native.so:system/lib64/libsketchology_native.so
+
 # Permissions
 PRODUCT_COPY_FILES += \
     $(PREB_PATH)/etc/permissions/privapp-permissions-lawnchair.xml:system/etc/permissions/privapp-permissions-lawnchair.xml \
+    $(PREB_PATH)/etc/permissions/privapp-permissions-turbo.xml:system/etc/permissions/privapp-permissions-turbo.xml
 
 # Sysconfig
 PRODUCT_COPY_FILES += \
     $(PREB_PATH)/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml:system/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml \
     $(PREB_PATH)/etc/sysconfig/google-hiddenapi-package-whitelist.xml:system/etc/sysconfig/google-hiddenapi-package-whitelist.xml \
+    $(PREB_PATH)/etc/sysconfig/turbo.xml:system/etc/sysconfig/turbo.xml \
     $(PREB_PATH)/etc/sysconfig/pixel.xml:system/etc/sysconfig/pixel.xml
 
 # Keyboard libs
