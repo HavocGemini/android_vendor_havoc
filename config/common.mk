@@ -1,7 +1,6 @@
 PRODUCT_BRAND ?= Havoc-OS
-
+PREB_PATH := vendor/havoc/prebuilt/common
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=+3
-
 EXCLUDE_SYSTEMUI_TESTS := true
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -40,15 +39,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/havoc/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/havoc/prebuilt/common/bin/50-havoc.sh:system/addon.d/50-havoc.sh
+    $(PREB_PATH)/bin/backuptool.sh:install/bin/backuptool.sh \
+    $(PREB_PATH)/bin/backuptool.functions:install/bin/backuptool.functions \
+    $(PREB_PATH)/bin/50-havoc.sh:system/addon.d/50-havoc.sh
 
 ifeq ($(AB_OTA_UPDATER),true)
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/bin/backuptool_ab.sh:system/bin/backuptool_ab.sh \
-    vendor/havoc/prebuilt/common/bin/backuptool_ab.functions:system/bin/backuptool_ab.functions \
-    vendor/havoc/prebuilt/common/bin/backuptool_postinstall.sh:system/bin/backuptool_postinstall.sh
+    $(PREB_PATH)/bin/backuptool_ab.sh:system/bin/backuptool_ab.sh \
+    $(PREB_PATH)/bin/backuptool_ab.functions:system/bin/backuptool_ab.functions \
+    $(PREB_PATH)/bin/backuptool_postinstall.sh:system/bin/backuptool_postinstall.sh
 endif
 
 # Backup Services whitelist
@@ -61,19 +60,19 @@ PRODUCT_COPY_FILES += \
 
 # init.d support
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner
+    $(PREB_PATH)/etc/init.d/00banner:system/etc/init.d/00banner
 
 # Don't export PS1 in /system/etc/mkshrc.
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/etc/mkshrc:system/etc/mkshrc
+    $(PREB_PATH)/etc/mkshrc:system/etc/mkshrc
 
 # Copy all Havoc-specific init rc files
-$(foreach f,$(wildcard vendor/havoc/prebuilt/common/etc/init/*.rc),\
+$(foreach f,$(wildcard $(PREB_PATH)/etc/init/*.rc),\
 	$(eval PRODUCT_COPY_FILES += $(f):system/etc/init/$(notdir $f)))
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/lib/content-types.properties:system/lib/content-types.properties
+    $(PREB_PATH)/lib/content-types.properties:system/lib/content-types.properties
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -81,11 +80,11 @@ PRODUCT_COPY_FILES += \
 
 # Sensitive Phone Numbers list
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/etc/sensitive_pn.xml:system/etc/sensitive_pn.xml
+    $(PREB_PATH)/etc/sensitive_pn.xml:system/etc/sensitive_pn.xml
 
 # World APN list
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+    $(PREB_PATH)/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # Enable wireless Xbox 360 controller support
 PRODUCT_COPY_FILES += \
@@ -93,7 +92,7 @@ PRODUCT_COPY_FILES += \
 
 # Fix Google dialer
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/etc/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
+    $(PREB_PATH)/etc/sysconfig/dialer_experience.xml:system/etc/sysconfig/dialer_experience.xml
 
 # Do not include art debug targets
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
@@ -107,11 +106,11 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 PRODUCT_PACKAGES += \
     Calculator \
     DeskClock \
+    Lawnchair \
     LiveWallpapers \
     LiveWallpapersPicker\
     messaging \
     OmniStyle \
-    PixelLauncher \
     SoundPickerPrebuilt \
     Stk \
     Terminal \
@@ -125,12 +124,12 @@ PRODUCT_PACKAGES += \
 
 # WeatherProvider
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/etc/permissions/com.android.providers.weather.xml:system/etc/permissions/com.android.providers.weather.xml \
-    vendor/havoc/prebuilt/common/etc/default-permissions/com.android.providers.weather.xml:system/etc/default-permissions/com.android.providers.weather.xml
+    $(PREB_PATH)/etc/permissions/com.android.providers.weather.xml:system/etc/permissions/com.android.providers.weather.xml \
+    $(PREB_PATH)/etc/default-permissions/com.android.providers.weather.xml:system/etc/default-permissions/com.android.providers.weather.xml
 
 # Substratum Key
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/priv-app/SubstratumKey.apk:system/priv-app/SubstratumKey/SubstratumKey.apk
+    $(PREB_PATH)/priv-app/SubstratumKey.apk:system/priv-app/SubstratumKey/SubstratumKey.apk
 	
 # Themes
 PRODUCT_PACKAGES += \
@@ -257,14 +256,19 @@ PRODUCT_PACKAGES += \
     HideCutout \
     StatusBarStock
 
+# Permissions
+PRODUCT_COPY_FILES += \
+    $(PREB_PATH)/etc/permissions/privapp-permissions-lawnchair.xml:system/etc/permissions/privapp-permissions-lawnchair.xml \
+
 # Sysconfig
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/etc/sysconfig/google-hiddenapi-package-whitelist.xml:system/etc/sysconfig/google-hiddenapi-package-whitelist.xml \
-    vendor/havoc/prebuilt/common/etc/sysconfig/pixel.xml:system/etc/sysconfig/pixel.xml
+    $(PREB_PATH)/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml:system/etc/sysconfig/lawnchair-hiddenapi-package-whitelist.xml \
+    $(PREB_PATH)/etc/sysconfig/google-hiddenapi-package-whitelist.xml:system/etc/sysconfig/google-hiddenapi-package-whitelist.xml \
+    $(PREB_PATH)/etc/sysconfig/pixel.xml:system/etc/sysconfig/pixel.xml
 
 # Keyboard libs
 PRODUCT_COPY_FILES += \
-    vendor/havoc/prebuilt/common/lib64/libjni_latinimegoogle.so:system/lib64/libjni_latinimegoogle.so
+    $(PREB_PATH)/lib64/libjni_latinimegoogle.so:system/lib64/libjni_latinimegoogle.so
 
 # Exchange support
 PRODUCT_PACKAGES += \
