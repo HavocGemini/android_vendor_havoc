@@ -16,4 +16,4 @@ $L "**********************************************"
 $L "*************** Android 9.0 Pie **************" 
 $L "************* Welcome to Havoc-OS ************" 
 $L "**********************************************" 
-$L `getprop ro.build.version.release` / Havoc-OS-`getprop ro.havoc.version`";
+$L `getprop ro.build.version.release` / `getprop ro.havoc.version`";
