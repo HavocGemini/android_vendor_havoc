@@ -50,6 +50,10 @@ PRODUCT_COPY_FILES += \
     $(PREB_PATH)/bin/backuptool_postinstall.sh:system/bin/backuptool_postinstall.sh
 endif
 
+# Permissions
+PRODUCT_COPY_FILES += \
+    vendor/havoc/prebuilt/common/etc/permissions/privapp-permissions-havoc.xml:system/etc/permissions/privapp-permissions-havoc.xml
+
 # Backup Services whitelist
 PRODUCT_COPY_FILES += \
     vendor/havoc/config/permissions/backup.xml:system/etc/sysconfig/backup.xml
