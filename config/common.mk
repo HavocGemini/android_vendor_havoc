@@ -119,7 +119,7 @@ PRODUCT_PACKAGES += \
     SoundPickerPrebuilt \
     Stk \
     Terminal \
-    Updates \
+    Updater \
     WallpaperPickerGooglePrebuilt \
     WeatherProvider
 
