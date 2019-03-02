@@ -118,14 +118,14 @@ function eat()
             # if adbd isn't root we can't write to /cache/recovery/
             adb root
             sleep 1
-            adb wait-for-device
+            adb wait-\for-device
             cat << EOF > /tmp/command
 --sideload_auto_reboot
 EOF
             if adb push /tmp/command /cache/recovery/ ; then
                 echo "Rebooting into recovery for sideload installation"
                 adb reboot recovery
-                adb wait-for-sideload
+                adb wait-\for-sideload
                 adb sideload $ZIPPATH
             fi
             rm /tmp/command
@@ -348,11 +348,11 @@ function installboot()
         fi
     fi
     adb start-server
-    adb wait-for-online
+    adb wait-\for-online
     adb root
     sleep 1
-    adb wait-for-online shell mount /system 2>&1 > /dev/null
-    adb wait-for-online remount
+    adb wait-\for-online shell mount /system 2>&1 > /dev/null
+    adb wait-\for-online remount
     if (adb shell getprop ro.havoc.device | grep -q "$HAVOC_BUILD");
     then
         adb push $OUT/boot.img /cache/
@@ -397,11 +397,11 @@ function installrecovery()
         fi
     fi
     adb start-server
-    adb wait-for-online
+    adb wait-\for-online
     adb root
     sleep 1
-    adb wait-for-online shell mount /system 2>&1 >> /dev/null
-    adb wait-for-online remount
+    adb wait-\for-online shell mount /system 2>&1 >> /dev/null
+    adb wait-\for-online remount
     if (adb shell getprop ro.havoc.device | grep -q "$HAVOC_BUILD");
     then
         adb push $OUT/recovery.img /cache/
@@ -522,7 +522,7 @@ function dopush()
         # so reconnect...
         adb connect "$TCPIPPORT"
     fi
-    adb wait-for-device &> /dev/null
+    adb wait-\for-device &> /dev/null
     sleep 0.3
     adb remount &> /dev/null
 
