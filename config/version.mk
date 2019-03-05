@@ -1,5 +1,5 @@
 # Versioning System
-HAVOC_BASE_VERSION = 2.2
+HAVOC_BASE_VERSION = 2.3
 
 ifndef HAVOC_BUILD_TYPE
     HAVOC_BUILD_TYPE := Unofficial
