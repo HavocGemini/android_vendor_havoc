@@ -22,5 +22,5 @@ HAVOC_TARGET_PACKAGE := $(PRODUCT_OUT)/$(HAVOC_VERSION).zip
 bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(HAVOC_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(HAVOC_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(HAVOC_TARGET_PACKAGE).md5sum
-	$(hide) ./device/xiaomi/gemini/tools/generate_gemini_info.sh $(HAVOC_TARGET_PACKAGE) $(HAVOC_BUILD_TYPE) $(TOP)
+	$(hide) ./vendor/havoc/tools/generate_build_info.sh $(HAVOC_TARGET_PACKAGE) $(HAVOC_BUILD_TYPE) $(HAVOC_BASE_VERSION) $(HAVOC_VERSION)
 	@echo "Package Complete: $(HAVOC_TARGET_PACKAGE)" >&2
