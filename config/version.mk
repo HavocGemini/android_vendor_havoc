@@ -13,9 +13,8 @@ HAVOC_VERSION := Havoc-OS-v$(HAVOC_BASE_VERSION)-$(HAVOC_BUILD_DATE)-$(HAVOC_BUI
 HAVOC_DATE := $(shell date -u +%d-%m-%Y)
 HAVOC_FINGERPRINT := Havoc-OS/v$(HAVOC_BASE_VERSION)/$(PLATFORM_VERSION)/$(TARGET_PRODUCT_SHORT)/$(HAVOC_BUILD_DATE)
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.havoc.base.version=$(HAVOC_BASE_VERSION) \
-    ro.havoc.build.date=$(HAVOC_DATE) \
-    ro.havoc.fingerprint=$(HAVOC_FINGERPRINT) \
-    ro.havoc.releasetype=$(HAVOC_BUILD_TYPE) \
-    ro.havoc.version=$(HAVOC_VERSION)
+export HAVOC_BASE_VERSION
+export HAVOC_DATE
+export HAVOC_FINGERPRINT
+export HAVOC_BUILD_TYPE
+export HAVOC_VERSION
