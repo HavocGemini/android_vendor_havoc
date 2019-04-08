@@ -243,6 +243,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/havoc/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/havoc/overlay/common
 
+PRODUCT_COPY_FILES += \
+    vendor/havoc/prebuilt/common/bootanimation/$(TARGET_SCREEN_WIDTH).zip:system/media/bootanimation.zip
+
 # Sepolicy
 include device/havoc/sepolicy/qcom/sepolicy.mk
 

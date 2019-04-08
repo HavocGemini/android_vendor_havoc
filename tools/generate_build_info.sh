@@ -23,7 +23,7 @@ cat << EOF >> $file_dir/$HAVOC_BUILD.json
       "size": "$size",
       "datetime": $datetime,
       "id": "$id",
-      "url": "https://sourceforge.net/projects/havoc-gemini/files/$HAVOC_BUILD/$filename/download"
+      "url": "https://sourceforge.net/projects/havoc-gemini/files/$LROM/$HAVOC_BUILD/$filename/download"
     }
   ]
 }
