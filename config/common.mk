@@ -243,6 +243,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/havoc/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/havoc/overlay/common
 
+# Sepolicy
+include device/havoc/sepolicy/qcom/sepolicy.mk
+
 # Version
 include vendor/havoc/config/version.mk
 
