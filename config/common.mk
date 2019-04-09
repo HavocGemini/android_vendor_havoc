@@ -124,7 +124,6 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker\
     messaging \
     OmniStyle \
-    SoundPickerPrebuilt \
     Stk \
     Terminal \
     Updater \
