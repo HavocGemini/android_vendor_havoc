@@ -55,4 +55,5 @@ sed -i 's/project/   */g' $Changelog
 
 cp $Changelog $OUT/system/etc/
 cp $Changelog $OUT/
+cp $Changelog OTA/$HAVOC_BUILD.md
 rm $Changelog

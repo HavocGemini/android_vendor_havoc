@@ -30,5 +30,4 @@ cat << EOF >> $file_dir/$HAVOC_BUILD.json
 EOF
 
   cp $file_dir/$HAVOC_BUILD.json $TOP/OTA/$HAVOC_BUILD.json;
-  cp $file_dir/Changelog.txt $TOP/OTA/$HAVOC_BUILD.md || echo "Skipping changelog"
 fi
