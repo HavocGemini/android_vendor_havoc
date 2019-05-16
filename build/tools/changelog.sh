@@ -15,14 +15,15 @@
 # limitations under the License.
 #
 
+Changelog=Changelog.txt
 export Changelog=Changelog.txt
 
 if [ -f $Changelog ];
 then
-	rm -f $Changelog
+rm -f $Changelog
 fi
 
-touch $Changelog
+echo "" > $Changelog
 
 # define changelog_days using 'export changelog_days=7'
 # this can be done before intiate build environment (. build/envsetup.sh) 
@@ -47,7 +48,7 @@ k=$(expr $i - 1)
 	echo '====================' >> $Changelog;
 	echo "" >> $Changelog;
 	# Cycle through every repo to find commits between 2 dates
-	repo forall -pc 'git log --oneline --after=$After_Date --until=$Until_Date' >> $Changelog
+	repo forall -pc 'git log --oneline --after=$After_Date --until=$Until_Date' >> $Changelog;
 	echo "" >> $Changelog;
 done
 
