@@ -1,4 +1,5 @@
 # Copyright (C) 2018 The LineageOS Project
+#           (c) 2019 ksrt12
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,6 +30,9 @@
 #                                          defaults to arm-linux-android- for arm
 #                                                      aarch64-linux-android- for arm64
 #                                                      x86_64-linux-android- for x86
+#
+#   TARGET_KERNEL_CROSS_COMPILE_ARM32  = 2nd compiler prefix (for arm64 targets)
+#                                          defaults to arm-linux-androideabi-
 #
 #   TARGET_KERNEL_CLANG_COMPILE        = Compile kernel with clang, defaults to false
 #
@@ -258,9 +262,14 @@ else
     KERNEL_CROSS_COMPILE := CROSS_COMPILE="$(ccache) $(KERNEL_TOOLCHAIN_PATH)"
 endif
 
+ifneq ($(TARGET_KERNEL_CROSS_COMPILE_ARM32),)
+    CROSS_COMPILE_ARM32 := $(TARGET_KERNEL_CROSS_COMPILE_ARM32)
+else
+    CROSS_COMPILE_ARM32 := arm-linux-androideabi-
+endif
 # Needed for CONFIG_COMPAT_VDSO, safe to set for all arm64 builds
 ifeq ($(KERNEL_ARCH),arm64)
-   KERNEL_CROSS_COMPILE += CROSS_COMPILE_ARM32="arm-linux-androideabi-"
+   KERNEL_CROSS_COMPILE += CROSS_COMPILE_ARM32="$(CROSS_COMPILE_ARM32)"
 endif
 
 ccache =
