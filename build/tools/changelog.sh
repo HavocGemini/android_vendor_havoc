@@ -18,10 +18,7 @@
 Changelog=Changelog.txt
 export Changelog=Changelog.txt
 
-if [ -f $Changelog ];
-then
-rm -f $Changelog
-fi
+if [ "$changelog_days" != "0" ]; then
 
 echo "" > $Changelog
 
@@ -53,8 +50,7 @@ k=$(expr $i - 1)
 done
 
 sed -i 's/project/   */g' $Changelog
-
+fi
 cp $Changelog $OUT/system/etc/
 cp $Changelog $OUT/
 cp $Changelog OTA/$HAVOC_BUILD.md
-rm $Changelog
