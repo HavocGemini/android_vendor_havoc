@@ -124,6 +124,7 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker\
     messaging \
     OmniStyle \
+    Recorder \
     Stk \
     Terminal \
     Updater \
