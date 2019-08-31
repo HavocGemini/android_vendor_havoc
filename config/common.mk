@@ -143,11 +143,16 @@ PRODUCT_COPY_FILES += \
 # Google prebuilts
 PRODUCT_PACKAGES += \
     DigitalWellbeing \
+    MarkupGoogle \
     Turbo
 
 # Long screenshot
 PRODUCT_PACKAGES += \
     Longshot
+
+# Markup libs
+PRODUCT_COPY_FILES += \
+    $(PREB_PATH)/lib64/libsketchology_native.so:system/lib64/libsketchology_native.so
 
 # Permissions
 PRODUCT_COPY_FILES += \
