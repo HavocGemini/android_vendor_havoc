@@ -18,13 +18,13 @@
 Changelog=Changelog.txt
 export Changelog=Changelog.txt
 
-if [ -n "$1" ]; then changelog_days=$1; fi
+if [ -n "$1" ]; then dtl=$1; fi
 
-if [ "$changelog_days" != "0" ]; then
-
+function generate()
+{
 echo "" > $Changelog
 
-for i in $(seq $changelog_days);
+for i in $(seq $1);
 do
 export After_Date=`date --date="$i days ago" +%m-%d-%Y`
 k=$(expr $i - 1)
@@ -44,7 +44,11 @@ k=$(expr $i - 1)
 done
 
 sed -i 's/▪ project /▼ /g' $Changelog
-fi
+}
+
+if [ -e $Changelog ] && [ -z "$dtl" ]; then dtl=0; fi
+if [ "$dtl" != "0" ]; then generate $dtl; fi
+
 cp $Changelog $OUT/system/etc/
 cp $Changelog $OUT/
 cp $Changelog OTA/$HAVOC_BUILD.md
